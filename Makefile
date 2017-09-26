@@ -23,14 +23,6 @@ dotfiles:
 	ln -sfn $(CURDIR)/gitignore $(HOME)/.gitignore;
 	git update-index --skip-worktree $(CURDIR)/.gitconfig;
 
-etc:
-	for file in $(shell find $(CURDIR)/etc -type f -not -name ".*.swp"); do \
-		f=$$(echo $$file | sed -e 's|$(CURDIR)||'); \
-		sudo ln -f $$file $$f; \
-	done
-	systemctl --user daemon-reload
-	sudo systemctl daemon-reload
-
 test: shellcheck
 
 # if this session isn't interactive, then we don't want to allocate a
